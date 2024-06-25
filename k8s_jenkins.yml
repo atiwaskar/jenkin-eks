@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
       - name: node1
-         image: 805797752511.dkr.ecr.ap-northeast-1.amazonaws.com/my-app
+         image: 805797752511.dkr.ecr.ap-northeast-1.amazonaws.com/my-app:latest
         ports:
           - containerPort: 80
 ---
