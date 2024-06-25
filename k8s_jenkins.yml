@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: dev
+  labels:
+    name: dev
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-deployment
+  namespace: dev
+  labels:
+    app: node_js
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: node_js
+  template:
+    metadata:
+      labels:
+        app: node_js
+    spec:
+      containers:
+      - name: node1
+         image: 805797752511.dkr.ecr.ap-northeast-1.amazonaws.com/my-app
+        ports:
+          - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: myapp-srv
+  namespace: dev
+spec:
+  type: ClusterIP
+  selector:
+    app: node_js
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+---
