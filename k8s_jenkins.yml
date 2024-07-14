@@ -11,22 +11,22 @@ metadata:
   name: myapp-deployment
   namespace: dev
   labels:
-    app: node_js
+    app: student
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: node_js
+      app: student
   template:
     metadata:
       labels:
-        app: node_js
+        app: student
     spec:
       containers:
-      - name: node1
-         image: 805797752511.dkr.ecr.ap-northeast-1.amazonaws.com/my-app:latest
+      - name: student
+         image: 339712867708.dkr.ecr.ap-south-1.amazonaws.com/project_1:latest
         ports:
-          - containerPort: 80
+          - containerPort: 8080
 ---
 apiVersion: v1
 kind: Service
@@ -36,9 +36,9 @@ metadata:
 spec:
   type: ClusterIP
   selector:
-    app: node_js
+    app: student
   ports:
     - protocol: TCP
-      port: 80
+      port: 8080
       targetPort: 80
 ---
